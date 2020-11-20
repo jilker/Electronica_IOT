@@ -1,7 +1,13 @@
 import socket
+import pickle
+
+def enviar(socket,data):
+    socket.send(pickle.dumps(data))
 
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
+PORT = 65435        # Port to listen on (non-privileged ports are > 1023)
+
+actions_list=['DA','SA']
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
@@ -9,8 +15,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     conn, addr = s.accept()
     with conn:
         print('Connected by', addr)
+        enviar(conn,actions_list)
         while True:
             data = conn.recv(1024)
             if not data:
                 break
             conn.sendall(data)
+        conn.shutdown(socket.SHUT_RDWR)
+        conn.close()
