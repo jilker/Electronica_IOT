@@ -1,5 +1,4 @@
 import numpy as np
-import argparse
 import cv2
 from tensorflow.keras.models import load_model
 from tensorflow.keras.models import Sequential
@@ -10,7 +9,7 @@ from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import os
 
-emotion_model_path = 'C:/Users/Jaime/PycharmProjects/memotion/models/_mini_XCEPTION_7_Y.100-0.82.hdf5'
+emotion_model_path = '_mini_XCEPTION_5_FER_RAF_CK.hdf5'
 model = load_model(emotion_model_path, compile=False)
 
 num_emotions=5
@@ -21,7 +20,7 @@ while True:
     ret, frame = cap.read()
     if not ret:
         break
-    facecasc = cv2.CascadeClassifier('C:/Users/Jaime/PycharmProjects/memotion/haarcascade_files/haarcascade_frontalface_default.xml')
+    facecasc = cv2.CascadeClassifier('haarcascade_files\haarcascade_frontalface_default.xml')
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = facecasc.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
     canvas = np.zeros((250, 300, 3), dtype="uint8")
@@ -34,7 +33,7 @@ while True:
         maxindex = int(np.argmax(prediction))
         cv2.putText(frame, emotion_dict[maxindex], (x + 20, y - 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2,
                     cv2.LINE_AA)
-        for (i, (emotion, prob)) in enumerate(zip(emotion_dict, prediction)):
+        for (i, (emotion, prob)) in enumerate(zip(emotion_dict.values(), prediction)):
             # construct the label text
             text = "{}: {:.2f}%".format(emotion, prob * 100)
 
