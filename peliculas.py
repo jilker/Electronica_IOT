@@ -16,26 +16,23 @@ class Peliculas():
         for it in range(0,genre.__len__()):
             genre[it]['Allow'] = 1
         return genre
-    def search(self):
-        discover = tmdb.Discover()       
-        return discover.movie(primary_release_date_gte = self.year, language = self.language , region = self.region , sort_by = 'popularity.desc')
-
-    def show_image(self,url):
-        url = 'https://image.tmdb.org/t/p/w500' + url
-        response = requests.get(url,stream=True) 
-        img = Image.open(response.raw)
-        img.show()
-
+    def search(self,page):
+        discover = tmdb.Discover()
+        without=self.set_genre()
+        return discover.movie(primary_release_date_gte = self.year, language = self.language, region = self.region , sort_by = 'popularity.desc' ,page=page,without_genres=without)
     def list_res(self,response):
         max = 5
         for s in response['results']:
             print(s['title'],s['id'], s['release_date'])
-
-
+    def set_genre(self):
+        without=""
+        for genre in self.genre_list:
+            if genre['Allow'] == 0:
+                without=without+','+str(genre['id'])
+        return without
 def test():
     peliculas = Peliculas()
-    res = peliculas.search()
+    res = peliculas.search('1')
     peliculas.list_res(res)
-    print('pause')
 if __name__ == "__main__":
     test() 
