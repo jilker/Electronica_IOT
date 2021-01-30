@@ -30,6 +30,10 @@ class Peliculas():
             if genre['Allow'] == 0:
                 without=without+','+str(genre['id'])
         return without
+    def genre_ids2names(self,ids):
+        return [genre['name'] for genre in self.genre_list if genre["id"] in ids]
+
+
 def test():
     peliculas = Peliculas()
     res = peliculas.search('1')
