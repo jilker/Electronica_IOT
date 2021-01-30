@@ -13,6 +13,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.year_spin.valueChanged.connect(self.update_year)
         self.Buscar_button.clicked.connect(self.search)
         self.Siguiente_button.clicked.connect(self.show_info)
+        self.Aceptar_button.clicked.connect(self.selecionar_button)
         self.status = [1,0]
     def search(self):
         self.res = self.peliculas.search("1")
@@ -50,6 +51,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.status[0] += 1
         self.res = self.peliculas.search(str(self.status[0]))
         self.res = self.res['results']
+    def selecionar_button(self):
+        it = self.status[1]
+        print (self.peliculas.genre_ids2names(self.res[it]['genre_ids']))
+
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])

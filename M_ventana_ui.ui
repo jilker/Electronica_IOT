@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1011</width>
+    <width>987</width>
     <height>653</height>
    </rect>
   </property>
@@ -43,8 +43,8 @@
    <widget class="QPushButton" name="Siguiente_button">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>420</y>
+      <x>690</x>
+      <y>440</y>
       <width>251</width>
       <height>51</height>
      </rect>
@@ -58,7 +58,7 @@
      <rect>
       <x>280</x>
       <y>40</y>
-      <width>281</width>
+      <width>371</width>
       <height>141</height>
      </rect>
     </property>
@@ -115,10 +115,10 @@
     <widget class="QTextBrowser" name="textBrowser">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>20</y>
-       <width>371</width>
-       <height>321</height>
+       <x>10</x>
+       <y>27</y>
+       <width>372</width>
+       <height>318</height>
       </rect>
      </property>
      <property name="html">
@@ -145,6 +145,25 @@ p, li { white-space: pre-wrap; }
     <property name="scaledContents">
      <bool>true</bool>
     </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+    <property name="openExternalLinks">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Aceptar_button">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>510</y>
+      <width>251</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Selecionar</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -152,7 +171,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1011</width>
+     <width>987</width>
      <height>22</height>
     </rect>
    </property>
