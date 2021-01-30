@@ -16,11 +16,13 @@ class Video(QThread):
         print('Comienzo bucle')  
         while True:
             ret, frame = cap.read()
+            print("Cont_Frame")
             cont_frame+=1
             if not ret:
                 print("No tengo imange")
                 break
             if cont_frame==4:
+                print("Cont_Frame==4")
                 cont_frame=0
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 faces = facecasc.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
@@ -30,5 +32,6 @@ class Video(QThread):
                     cropped_img = np.expand_dims(np.expand_dims(cv2.resize(roi_gray, (48, 48)), -1), 0)
                     self.prediction = model.predict(cropped_img/255)[0]
             if cv2.waitKey(1) & 0xFF == ord('q'):
+                print("Me salgo")
                 break
         cap.release()
