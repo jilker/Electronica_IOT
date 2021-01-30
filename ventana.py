@@ -2,12 +2,15 @@ from ventana_ui import *
 from peliculas import Peliculas
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from video_class import *
 import urllib.request
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
         self.peliculas = Peliculas()
+        self.video = Video()
+        self.video.run()
         self.fill_table()
         self.Generos_lista.itemDoubleClicked.connect(self.allow_genre)
         self.year_spin.valueChanged.connect(self.update_year)
@@ -15,6 +18,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Siguiente_button.clicked.connect(self.show_info)
         self.Aceptar_button.clicked.connect(self.selecionar_button)
         self.status = [1,0]
+        self.genre_selected = []
     def search(self):
         self.res = self.peliculas.search("1")
         self.res = self.res['results']
@@ -53,9 +57,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.res = self.res['results']
     def selecionar_button(self):
         it = self.status[1]
-        print (self.peliculas.genre_ids2names(self.res[it]['genre_ids']))
-
-
+        self.genre_selected = self.peliculas.genre_ids2names(self.res[it]['genre_ids'])
+        print(self.video.sentimiento)
+        print(self.video.prediction)
+        #TODO:Cerrar ventana
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
