@@ -58,17 +58,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.res = self.peliculas.search(str(self.status[0]))
         self.res = self.res['results']
     def selecionar_button(self):
+        print('Coger prediccion')
         self.prediction = [sentimiento/sum(self.video.prediction) for sentimiento in self.video.prediction]
-        self.video.terminate()
+
         it = self.status[1]
+        print('Coger generos')
         self.genre_selected = self.peliculas.genre_ids2names(self.res[it]['genre_ids'])
+        print('Abrir JSON')
         with open('save.json') as f:
             self.load=json.load(f)
         for genre in self.genre_selected:
             self.load[genre] = [x + y for x, y in zip(self.load[genre], self.prediction)]
+        print('Escribir JSON')
         with open('save.json','w') as json_file:
             json.dump(self.load,json_file)
-        self.showdialog()
+        #self.showdialog()
+        print(self.genre_selected)
+        #self.video.terminate()
         self.close()
     def showdialog(self):
         msg = QMessageBox()
