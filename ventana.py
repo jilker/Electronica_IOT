@@ -62,11 +62,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.video.terminate()
         it = self.status[1]
         self.genre_selected = self.peliculas.genre_ids2names(self.res[it]['genre_ids'])
+        with open('save.json') as f:
+            self.load=json.load(f)
+        for genre in self.genre_selected:
+            self.load[genre] = [x + y for x, y in zip(self.load[genre], self.prediction)]
         with open('save.json','w') as json_file:
-            data = json.load(json_file)
-            for genre in self.genre_selected:
-                data[genre] = data[genre] + self.prediction 
-            data = json.dump(data,json_file)
+            json.dump(self.load,json_file)
         self.showdialog()
         self.close()
     def showdialog(self):
