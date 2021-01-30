@@ -63,7 +63,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         it = self.status[1]
         print('Coger generos')
-        self.genre_selected = self.peliculas.genre_ids2names(self.res[it]['genre_ids'])
+        self.genre_selected = self.peliculas.genre_ids2names(self.res[it-1]['genre_ids'])
         print('Abrir JSON')
         with open('save.json') as f:
             self.load=json.load(f)
