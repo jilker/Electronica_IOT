@@ -20,6 +20,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Aceptar_button.clicked.connect(self.selecionar_button)
         self.status = [1,0]
         self.genre_selected = []
+        print(self.video.isRunning())
     def search(self):
         self.res = self.peliculas.search("1")
         self.res = self.res['results']
@@ -40,6 +41,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             item.setBackground(QColor('#ffffff'))
             genre['Allow']  = 1
     def show_info(self):
+        print(self.video.isRunning())
         it = self.status[1]
         url = 'https://image.tmdb.org/t/p/w500' + self.res[it]['poster_path']
         data = urllib.request.urlopen(url).read()
