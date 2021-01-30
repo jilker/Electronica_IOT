@@ -8,9 +8,11 @@ class Video(QThread):
     """
     Hilo dedicado a las mediciones en tiempo real.
     """
+#     sentimientos = pyqtSignal(list)
     def __init__(self):
-        self.sentimientos = pyqtSignal(list)
+        super().__init__()
         self.prediction = []
+        
     def run (self):
         emotion_model_path = '_mini_XCEPTION_5_FER_RAF_CK.hdf5'
         model = load_model(emotion_model_path, compile=False)
@@ -40,7 +42,7 @@ class Video(QThread):
                     tic=time.perf_counter()
                     self.prediction = model.predict(cropped_img/255)[0]
                     toc=time.perf_counter()
-                    self.sentimientos.emit([self.prediction])
+#                     sentimientos.emit([self.prediction])
                     print(f"Predicción {toc-tic:0.4f}seconds")
         #             maxindex = int(np.argmax(prediction))
         #             list_emotion[emotion_dict.get(maxindex)]+=1

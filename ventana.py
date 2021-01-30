@@ -10,7 +10,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.peliculas = Peliculas()
         self.video = Video()
-        self.video.run()
+        self.video.start()
+        print("Hola")
         self.fill_table()
         self.Generos_lista.itemDoubleClicked.connect(self.allow_genre)
         self.year_spin.valueChanged.connect(self.update_year)
@@ -58,7 +59,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def selecionar_button(self):
         it = self.status[1]
         self.genre_selected = self.peliculas.genre_ids2names(self.res[it]['genre_ids'])
-        print(self.video.sentimiento)
         print(self.video.prediction)
         #TODO:Cerrar ventana
 
