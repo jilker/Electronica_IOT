@@ -4,6 +4,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from video_class import *
 import urllib.request
+import json
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
@@ -19,7 +20,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Aceptar_button.clicked.connect(self.selecionar_button)
         self.status = [1,0]
         self.genre_selected = []
-        print(self.video.isRunning())
     def search(self):
         self.res = self.peliculas.search("1")
         self.res = self.res['results']
@@ -62,10 +62,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.video.terminate()
         it = self.status[1]
         self.genre_selected = self.peliculas.genre_ids2names(self.res[it]['genre_ids'])
-        
+        with open('save.json','w') as json_file:
+            data = json.load(json_file)
+            for genre in self.genre_selected:
+                data[genre] = data[genre] + self.prediction 
+            data = json.dump(data,json_file)
+        self.showdialog()
         self.close()
-        #TODO:Cerrar ventana
-
+    def showdialog(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Gracias por utilizar la aplicación")
+        msg.setWindowTitle("SentimentalMovie")
+        msg.setStandardButtons(QMessageBox.Ok)
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     window = MainWindow()
