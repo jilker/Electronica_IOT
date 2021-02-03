@@ -18,9 +18,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Buscar_button.clicked.connect(self.search)
         self.Siguiente_button.clicked.connect(self.show_info)
         self.Aceptar_button.clicked.connect(self.selecionar_button)
+        self.Siguiente_button.setEnabled(False)
+        self.Aceptar_button.setEnabled(False)
         self.status = [1,0]
         self.genre_selected = []
     def search(self):
+        self.Siguiente_button.setEnabled(True)
+        self.Aceptar_button.setEnabled(True)
         self.res = self.peliculas.search("1")
         self.res = self.res['results']
         self.status = [1,0]
@@ -40,7 +44,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             item.setBackground(QColor('#ffffff'))
             genre['Allow']  = 1
     def show_info(self):
-        print(self.video.isRunning())
         it = self.status[1]
         url = 'https://image.tmdb.org/t/p/w500' + self.res[it]['poster_path']
         data = urllib.request.urlopen(url).read()
@@ -72,7 +75,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print('Escribir JSON')
         with open('save.json','w') as json_file:
             json.dump(self.load,json_file)
-        #self.showdialog()
+        QMessageBox.about(self, "Fin","Gracias por utilizar la aplicación")
         print(self.genre_selected)
         #self.video.terminate()
         self.close()
