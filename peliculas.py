@@ -20,10 +20,6 @@ class Peliculas():
         discover = tmdb.Discover()
         without=self.set_genre()
         return discover.movie(primary_release_date_gte = self.year, language = self.language, region = self.region , sort_by = 'popularity.desc' ,page=page,without_genres=without)
-    def list_res(self,response):
-        max = 5
-        for s in response['results']:
-            print(s['title'],s['id'], s['release_date'])
     def set_genre(self):
         without=""
         for genre in self.genre_list:

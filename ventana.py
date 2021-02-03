@@ -79,12 +79,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print(self.genre_selected)
         #self.video.terminate()
         self.close()
-    def showdialog(self):
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Information)
-        msg.setText("Gracias por utilizar la aplicación")
-        msg.setWindowTitle("SentimentalMovie")
-        msg.setStandardButtons(QMessageBox.Ok)
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     window = MainWindow()
