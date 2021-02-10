@@ -13,5 +13,9 @@
   "Music": [0, 0, 0, 0, 0],
   "Mystery": [0, 0, 0, 0, 0],
   "Romance": [0, 0, 0, 0, 0],
-  "Science Fiction": [0, 0, 0, 0, 0]
+  "Science Fiction": [0, 0, 0, 0, 0],
+  "TV Movie": [0, 0, 0, 0, 0],
+  "Thriller": [0, 0, 0, 0, 0],
+  "War": [0, 0, 0, 0, 0],
+  "Western": [0, 0, 0, 0, 0]
 }
