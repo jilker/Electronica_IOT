@@ -4,7 +4,7 @@ from PIL import Image
 import requests
 class Peliculas():
     def __init__(self):
-        tmdb.API_KEY = tmdb.API_KEY = '3651998862dca081be4b935c5292cf51'
+        tmdb.API_KEY = tmdb.API_KEY = ''
         self.genre_list = self.get_genres()
         self.language = 'es'
         self.region = 'es'
